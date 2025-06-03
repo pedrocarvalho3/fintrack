@@ -1,3 +1,5 @@
+'use client';
+
 import { Home, Wallet, FolderTree, Info, LogOut, Settings } from 'lucide-react';
 import Image from 'next/image';
 
@@ -16,6 +18,7 @@ import {
 } from '@/components/ui/sidebar';
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
+import { useTheme } from 'next-themes';
 
 const items = [
   {
@@ -46,6 +49,8 @@ const items = [
 ];
 
 export function AppSidebar({ children }: { children: React.ReactNode }) {
+  const { theme } = useTheme();
+
   return (
     <>
       <Sidebar>
@@ -56,7 +61,9 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
                 <a href="#" className="flex items-center gap-2">
                   <div className="flex flex-col gap-2 leading-none">
                     <Image
-                      src="/logo_light.svg"
+                      src={
+                        theme === 'dark' ? '/logo_light.svg' : '/logo_dark.svg'
+                      }
                       alt="Logo"
                       width={100}
                       height={100}
@@ -73,7 +80,7 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
 
         <SidebarContent>
           <SidebarGroup>
-            <SidebarGroupLabel className="mb-4 text-sm font-medium">
+            <SidebarGroupLabel className="mb-4 text-lg font-medium">
               Navigation
             </SidebarGroupLabel>
             <SidebarGroupContent>
@@ -83,7 +90,7 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
                     <SidebarMenuButton asChild>
                       <Link href={item.url}>
                         <item.icon />
-                        <span>{item.title}</span>
+                        <span className="text-sm">{item.title}</span>
                       </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>

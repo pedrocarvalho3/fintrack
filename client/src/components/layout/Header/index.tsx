@@ -1,3 +1,5 @@
+import { Balance } from '@/components/blocks/Balance';
+import { ThemeModeToggle } from '@/components/blocks/ThemeModeToggle';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Breadcrumb,
@@ -7,11 +9,13 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { Button } from '@/components/ui/button';
 import { SidebarTrigger } from '@/components/ui/sidebar';
+import { Bell } from 'lucide-react';
 
 export function Header() {
   return (
-    <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+    <header className="flex h-16 shrink-0 items-center justify-between gap-2 border-b px-4">
       <SidebarTrigger />
       <Breadcrumb>
         <BreadcrumbList>
@@ -24,10 +28,18 @@ export function Header() {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <div className="flex flex-1 items-center justify-end gap-2">
+      <div className="flex flex-1 items-center justify-end gap-8">
+        <ThemeModeToggle />
+        <Balance />
+        <Button variant="ghost" size="icon" className="relative">
+          <Bell />
+          <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+            9
+          </span>
+        </Button>
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-          <AvatarFallback>U</AvatarFallback>
+          <AvatarFallback></AvatarFallback>
         </Avatar>
       </div>
     </header>
