@@ -3,11 +3,16 @@ export enum CategoryType {
   EXPENSE = 'EXPENSE',
 }
 
+export enum StatusType {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+}
+
 export interface Category {
   id: number;
   name: string;
   transactionCount: number;
-  status: string;
+  status: StatusType;
   icon: string;
   type: CategoryType;
 }
