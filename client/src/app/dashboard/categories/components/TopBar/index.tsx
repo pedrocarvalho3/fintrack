@@ -1,6 +1,6 @@
 'use client';
 
-import { Search } from 'lucide-react';
+import { Filter, Search } from 'lucide-react';
 
 import { RefreshCw } from 'lucide-react';
 
@@ -33,6 +33,9 @@ export default function TopBar({
         </div>
         <Button variant="outline" size="icon" onClick={handleRefresh}>
           <RefreshCw className="h-4 w-4" />
+        </Button>
+        <Button variant="outline" size="icon">
+          <Filter className="h-4 w-4" />
         </Button>
       </div>
       <Button className="w-full sm:w-auto">
