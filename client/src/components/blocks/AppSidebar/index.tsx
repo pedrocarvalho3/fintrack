@@ -28,22 +28,22 @@ const items = [
   },
   {
     title: 'Transactions',
-    url: '/transactions',
+    url: '/dashboard/transactions',
     icon: Wallet,
   },
   {
     title: 'Categories',
-    url: '/categories',
+    url: '/dashboard/categories',
     icon: FolderTree,
   },
   {
     title: 'Settings',
-    url: '/settings',
+    url: '/dashboard/settings',
     icon: Settings,
   },
   {
     title: 'About',
-    url: '/about',
+    url: '/dashboard/about',
     icon: Info,
   },
 ];
