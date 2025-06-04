@@ -1,9 +1,5 @@
-import Title from '@/components/blocks/Title';
+import CategoriesContainer from './components';
 
 export default function Page() {
-  return (
-    <div>
-      <Title>Categories</Title>
-    </div>
-  );
+  return <CategoriesContainer />;
 }
