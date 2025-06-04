@@ -12,12 +12,14 @@ interface TopBarProps {
   searchTerm: string;
   handleSearch: (value: string) => void;
   handleRefresh: () => void;
+  setCreateCategoryDialogOpen: (open: boolean) => void;
 }
 
 export default function TopBar({
   searchTerm,
   handleSearch,
   handleRefresh,
+  setCreateCategoryDialogOpen,
 }: TopBarProps) {
   return (
     <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
@@ -38,7 +40,10 @@ export default function TopBar({
           <Filter className="h-4 w-4" />
         </Button>
       </div>
-      <Button className="w-full sm:w-auto">
+      <Button
+        className="w-full sm:w-auto"
+        onClick={() => setCreateCategoryDialogOpen(true)}
+      >
         <Plus className="mr-2 h-4 w-4" />
         Create New Category
       </Button>
