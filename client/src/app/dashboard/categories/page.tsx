@@ -1,7 +1,9 @@
+import Title from '@/components/blocks/Title';
+
 export default function Page() {
   return (
     <div>
-      <h1>Categories</h1>
+      <Title>Categories</Title>
     </div>
   );
 }
