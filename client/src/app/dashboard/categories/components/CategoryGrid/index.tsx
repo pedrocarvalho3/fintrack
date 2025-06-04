@@ -1,15 +1,32 @@
 import { Category } from '../../types';
-import CategoryList from './components/CategoryList';
+import CategoryCard from './components/CategoryCard';
 import EmptyCategoryGrid from './components/EmptyCategoryGrid';
 
 interface CategoryGridProps {
   categories: Category[];
+  setDeleteDialogOpen: (open: boolean) => void;
+  setCategoryId: (id: number) => void;
 }
 
-export default function CategoryGrid({ categories }: CategoryGridProps) {
+export default function CategoryGrid({
+  categories,
+  setDeleteDialogOpen,
+  setCategoryId,
+}: CategoryGridProps) {
   if (categories.length === 0) {
     return <EmptyCategoryGrid />;
   }
 
-  return <CategoryList categories={categories} />;
+  return (
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {categories.map(category => (
+        <CategoryCard
+          key={category.id}
+          category={category}
+          setDeleteDialogOpen={setDeleteDialogOpen}
+          setCategoryId={setCategoryId}
+        />
+      ))}
+    </div>
+  );
 }
