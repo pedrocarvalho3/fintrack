@@ -6,12 +6,14 @@ interface CategoryGridProps {
   categories: Category[];
   setDeleteDialogOpen: (open: boolean) => void;
   setCategoryId: (id: number) => void;
+  setEditCategoryDialogOpen: (open: boolean) => void;
 }
 
 export default function CategoryGrid({
   categories,
   setDeleteDialogOpen,
   setCategoryId,
+  setEditCategoryDialogOpen,
 }: CategoryGridProps) {
   if (categories.length === 0) {
     return <EmptyCategoryGrid />;
@@ -25,6 +27,7 @@ export default function CategoryGrid({
           category={category}
           setDeleteDialogOpen={setDeleteDialogOpen}
           setCategoryId={setCategoryId}
+          setEditCategoryDialogOpen={setEditCategoryDialogOpen}
         />
       ))}
     </div>

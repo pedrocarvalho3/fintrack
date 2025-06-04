@@ -8,12 +8,14 @@ interface CategoryCardProps {
   category: Category;
   setDeleteDialogOpen: (open: boolean) => void;
   setCategoryId: (id: number) => void;
+  setEditCategoryDialogOpen: (open: boolean) => void;
 }
 
 export default function CategoryCard({
   category,
   setDeleteDialogOpen,
   setCategoryId,
+  setEditCategoryDialogOpen,
 }: CategoryCardProps) {
   return (
     <Card
@@ -60,7 +62,13 @@ export default function CategoryCard({
         </div>
       </CardContent>
       <CardFooter className="flex justify-end gap-2">
-        <Button variant="outline">
+        <Button
+          variant="outline"
+          onClick={() => {
+            setEditCategoryDialogOpen(true);
+            setCategoryId(category.id);
+          }}
+        >
           Edit <Pencil className="ml-2 h-4 w-4" />
         </Button>
         <Button

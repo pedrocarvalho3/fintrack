@@ -11,6 +11,8 @@ import useDeleteCategory from '../hooks/useDeleteCategory';
 import { Toaster } from 'sonner';
 import useCreateCategory from '../hooks/useCreateCategory';
 import CreateCategoryDialog from './CreateCategoryDialog';
+import EditCategoryDialog from './EditCategoryDialog';
+import useEditCategory from '../hooks/useEditCategory';
 
 export default function CategoriesContainer() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,6 +25,11 @@ export default function CategoriesContainer() {
     setCreateCategoryDialogOpen,
     handleCreateCategory,
   } = useCreateCategory();
+  const {
+    editCategoryDialogOpen,
+    setEditCategoryDialogOpen,
+    handleEditCategory,
+  } = useEditCategory(categoryId);
 
   return (
     <div className="space-y-6">
@@ -37,11 +44,17 @@ export default function CategoriesContainer() {
         categories={categories}
         setDeleteDialogOpen={setDeleteDialogOpen}
         setCategoryId={setCategoryId}
+        setEditCategoryDialogOpen={setEditCategoryDialogOpen}
       />
       <Pagination
         totalPages={10}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
+      />
+      <EditCategoryDialog
+        editCategoryDialogOpen={editCategoryDialogOpen}
+        setEditCategoryDialogOpen={setEditCategoryDialogOpen}
+        handleEditCategory={handleEditCategory}
       />
       <CreateCategoryDialog
         createCategoryDialogOpen={createCategoryDialogOpen}
