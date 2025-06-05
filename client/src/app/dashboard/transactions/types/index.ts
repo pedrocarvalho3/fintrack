@@ -10,7 +10,6 @@ export interface Transaction {
   id: number;
   name: string;
   description: string;
-  icon: string;
   category: Category;
   amount: number;
   date: Date;
