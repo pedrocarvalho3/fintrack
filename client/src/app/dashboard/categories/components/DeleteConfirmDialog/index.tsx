@@ -11,11 +11,13 @@ import {
 import { useContext } from 'react';
 import { CategoryContext } from '@/app/dashboard/categories/context/CategoryContext';
 
-interface DeleteConfirmDialogProps {
+interface DeleteCategoryDialogProps {
   label: string;
 }
 
-export default function DeleteConfirmDialog({ label }: DeleteConfirmDialogProps) {
+export default function DeleteCategoryDialog({
+  label,
+}: DeleteCategoryDialogProps) {
   const {
     deleteCategory: {
       deleteDialogOpen,

@@ -6,7 +6,7 @@ import CategoryGrid from './CategoryGrid';
 import Pagination from '@/components/blocks/Pagination';
 import { useCategories } from '../hooks/useCategories';
 import { useState } from 'react';
-import DeleteConfirmDialog from '@/components/blocks/DeleteConfirmDialog';
+import DeleteCategoryDialog from './DeleteConfirmDialog';
 import { Toaster } from 'sonner';
 import CreateCategoryDialog from './CreateCategoryDialog';
 import { CategoryProvider } from '../context/CategoryContext';
@@ -33,7 +33,7 @@ export default function CategoriesContainer() {
         />
         <CreateCategoryDialog />
         <UpdateCategoryDialog />
-        <DeleteConfirmDialog label="category" />
+        <DeleteCategoryDialog label="category" />
         <Toaster />
       </div>
     </CategoryProvider>
