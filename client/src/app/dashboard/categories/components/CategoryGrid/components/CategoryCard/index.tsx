@@ -3,20 +3,17 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Pencil, Trash2 } from 'lucide-react';
+import { useContext } from 'react';
+import { CategoryContext } from '@/app/dashboard/categories/context/CategoryContext';
 
 interface CategoryCardProps {
   category: Category;
-  setDeleteDialogOpen: (open: boolean) => void;
-  setCategoryId: (id: number) => void;
-  setEditCategoryDialogOpen: (open: boolean) => void;
 }
 
-export default function CategoryCard({
-  category,
-  setDeleteDialogOpen,
-  setCategoryId,
-  setEditCategoryDialogOpen,
-}: CategoryCardProps) {
+export default function CategoryCard({ category }: CategoryCardProps) {
+  const { setCurrentCategoryId, deleteCategory, updateCategory } =
+    useContext(CategoryContext)!;
+
   return (
     <Card
       key={category.id}
@@ -65,8 +62,8 @@ export default function CategoryCard({
         <Button
           variant="outline"
           onClick={() => {
-            setEditCategoryDialogOpen(true);
-            setCategoryId(category.id);
+            setCurrentCategoryId(category.id);
+            updateCategory.setUpdateCategoryDialogOpen(true);
           }}
         >
           Edit <Pencil className="ml-2 h-4 w-4" />
@@ -74,8 +71,8 @@ export default function CategoryCard({
         <Button
           variant="secondary"
           onClick={() => {
-            setDeleteDialogOpen(true);
-            setCategoryId(category.id);
+            setCurrentCategoryId(category.id);
+            deleteCategory.setDeleteDialogOpen(true);
           }}
         >
           Delete <Trash2 className="ml-2 h-4 w-4 text-red-500" />

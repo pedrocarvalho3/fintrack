@@ -9,29 +9,29 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useContext } from 'react';
+import { CategoryContext } from '../../context/CategoryContext';
 
-interface EditCategoryDialogProps {
-  editCategoryDialogOpen: boolean;
-  setEditCategoryDialogOpen: (open: boolean) => void;
-  handleEditCategory: () => void;
-}
+export default function UpdateCategoryDialog() {
+  const {
+    updateCategory: {
+      updateCategoryDialogOpen,
+      setUpdateCategoryDialogOpen,
+      handleUpdateCategory,
+    },
+  } = useContext(CategoryContext)!;
 
-export default function EditCategoryDialog({
-  editCategoryDialogOpen,
-  setEditCategoryDialogOpen,
-  handleEditCategory,
-}: EditCategoryDialogProps) {
   return (
     <Dialog
-      open={editCategoryDialogOpen}
-      onOpenChange={setEditCategoryDialogOpen}
+      open={updateCategoryDialogOpen}
+      onOpenChange={setUpdateCategoryDialogOpen}
     >
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Edit Category</DialogTitle>
+          <DialogTitle>Update Category</DialogTitle>
         </DialogHeader>
         <DialogDescription>
-          Edit the category to update its information.
+          Update the category to update its information.
         </DialogDescription>
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
@@ -50,11 +50,11 @@ export default function EditCategoryDialog({
         <DialogFooter>
           <Button
             variant="secondary"
-            onClick={() => setEditCategoryDialogOpen(false)}
+            onClick={() => setUpdateCategoryDialogOpen(false)}
           >
             Cancel
           </Button>
-          <Button variant="default" onClick={handleEditCategory}>
+          <Button variant="default" onClick={handleUpdateCategory}>
             Save
           </Button>
         </DialogFooter>

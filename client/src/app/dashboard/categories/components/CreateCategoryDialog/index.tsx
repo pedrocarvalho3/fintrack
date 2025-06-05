@@ -9,18 +9,18 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useContext } from 'react';
+import { CategoryContext } from '../../context/CategoryContext';
 
-interface CreateCategoryDialogProps {
-  createCategoryDialogOpen: boolean;
-  setCreateCategoryDialogOpen: (open: boolean) => void;
-  handleCreateCategory: () => void;
-}
+export default function CreateCategoryDialog() {
+  const {
+    createCategory: {
+      createCategoryDialogOpen,
+      setCreateCategoryDialogOpen,
+      handleCreateCategory,
+    },
+  } = useContext(CategoryContext)!;
 
-export default function CreateCategoryDialog({
-  createCategoryDialogOpen,
-  setCreateCategoryDialogOpen,
-  handleCreateCategory,
-}: CreateCategoryDialogProps) {
   return (
     <Dialog
       open={createCategoryDialogOpen}

@@ -8,20 +8,22 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { useContext } from 'react';
+import { CategoryContext } from '@/app/dashboard/categories/context/CategoryContext';
 
 interface DeleteConfirmDialogProps {
   label: string;
-  deleteDialogOpen: boolean;
-  setDeleteDialogOpen: (open: boolean) => void;
-  handleDeleteConfirm: () => void;
 }
 
-export default function DeleteConfirmDialog({
-  label,
-  deleteDialogOpen,
-  setDeleteDialogOpen,
-  handleDeleteConfirm,
-}: DeleteConfirmDialogProps) {
+export default function DeleteConfirmDialog({ label }: DeleteConfirmDialogProps) {
+  const {
+    deleteCategory: {
+      deleteDialogOpen,
+      setDeleteDialogOpen,
+      handleDeleteConfirm,
+    },
+  } = useContext(CategoryContext)!;
+
   return (
     <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
       <AlertDialogContent>
