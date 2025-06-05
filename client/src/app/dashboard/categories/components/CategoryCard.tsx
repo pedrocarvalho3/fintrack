@@ -1,10 +1,10 @@
-import { Category, CategoryType, StatusType } from '../../../../types';
+import { Category, CategoryType, StatusType } from '../types';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Pencil, Trash2 } from 'lucide-react';
 import { useContext } from 'react';
-import { CategoryContext } from '@/app/dashboard/categories/context/CategoryContext';
+import { CategoryContext } from '../context/CategoryContext';
 
 interface CategoryCardProps {
   category: Category;

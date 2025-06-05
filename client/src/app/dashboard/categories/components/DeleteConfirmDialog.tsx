@@ -9,7 +9,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { useContext } from 'react';
-import { CategoryContext } from '@/app/dashboard/categories/context/CategoryContext';
+import { CategoryContext } from '../context/CategoryContext';
 
 interface DeleteCategoryDialogProps {
   label: string;

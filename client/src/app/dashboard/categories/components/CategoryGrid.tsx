@@ -1,6 +1,6 @@
-import { Category } from '../../types';
-import CategoryCard from './components/CategoryCard';
-import EmptyCategoryGrid from './components/EmptyCategoryGrid';
+import { Category } from '../types';
+import CategoryCard from './CategoryCard';
+import EmptyCategoryGrid from './EmptyCategoryGrid';
 
 export default function CategoryGrid({
   categories,

@@ -1,4 +1,4 @@
-import CategoriesContainer from './components/CategoriesContainer';
+import CategoriesContainer from './CategoriesContainer';
 
 export default function CategoriesPage() {
   return <CategoriesContainer />;

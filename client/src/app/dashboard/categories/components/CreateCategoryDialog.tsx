@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useContext } from 'react';
-import { CategoryContext } from '../../context/CategoryContext';
+import { CategoryContext } from '../context/CategoryContext';
 
 export default function CreateCategoryDialog() {
   const {

@@ -1,13 +1,11 @@
 'use client';
 
 import { Filter, Search } from 'lucide-react';
-
 import { RefreshCw } from 'lucide-react';
-
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { CategoryContext } from '../../context/CategoryContext';
+import { CategoryContext } from '../context/CategoryContext';
 import { useContext } from 'react';
 
 interface TopBarProps {

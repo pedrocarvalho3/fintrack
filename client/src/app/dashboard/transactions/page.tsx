@@ -1,4 +1,4 @@
-import TransactionsContainer from './components/TransactionsContainer';
+import TransactionsContainer from './TransactionsContainer';
 
 export default function TransactionsPage() {
   return <TransactionsContainer />;

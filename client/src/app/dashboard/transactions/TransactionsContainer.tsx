@@ -1,7 +1,7 @@
 'use client';
 
 import Title from '@/components/blocks/Title';
-import TopBar from './TopBar';
+import TopBar from './components/TopBar';
 
 export default function TransactionsContainer() {
   return (
