@@ -1,14 +1,12 @@
 'use client';
 
 import { Filter, Search } from 'lucide-react';
-
 import { RefreshCw } from 'lucide-react';
-
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-// import { CategoryContext } from '../../context/CategoryContext';
-// import { useContext } from 'react';
+import { TransactionContext } from '../context/TransactionContext';
+import { useContext } from 'react';
 
 interface TopBarProps {
   searchTerm: string;
@@ -21,7 +19,7 @@ export default function TopBar({
   handleSearch,
   handleRefresh,
 }: TopBarProps) {
-  // const { createCategory } = useContext(CategoryContext)!;
+  const { createTransaction } = useContext(TransactionContext)!;
 
   return (
     <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
@@ -29,7 +27,7 @@ export default function TopBar({
         <div className="relative flex-1 sm:max-w-sm">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
           <Input
-            placeholder="Search categories..."
+            placeholder="Search transactions..."
             value={searchTerm}
             onChange={e => handleSearch(e.target.value)}
             className="pl-10"
@@ -44,10 +42,10 @@ export default function TopBar({
       </div>
       <Button
         className="w-full sm:w-auto"
-        // onClick={() => createCategory.setCreateCategoryDialogOpen(true)}
+        onClick={() => createTransaction.setCreateTransactionDialogOpen(true)}
       >
         <Plus className="mr-2 h-4 w-4" />
-        Create New Category
+        Create New Transaction
       </Button>
     </div>
   );

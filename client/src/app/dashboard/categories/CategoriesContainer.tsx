@@ -6,7 +6,7 @@ import CategoryGrid from './components/CategoryGrid';
 import Pagination from '@/components/blocks/Pagination';
 import { useCategories } from './hooks/useCategories';
 import { useState } from 'react';
-import DeleteCategoryDialog from './components/DeleteConfirmDialog';
+import DeleteCategoryDialog from './components/DeleteCategoryDialog';
 import { Toaster } from 'sonner';
 import CreateCategoryDialog from './components/CreateCategoryDialog';
 import { CategoryProvider } from './context/CategoryContext';
