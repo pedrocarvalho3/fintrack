@@ -7,7 +7,7 @@ export enum TransactionStatus {
 }
 
 export interface Transaction {
-  id: string;
+  id: number;
   name: string;
   description: string;
   icon: string;

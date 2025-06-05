@@ -6,7 +6,7 @@ import { mockCategories } from './mock-categories';
 
 export const mockTransactions: Transaction[] = [
   {
-    id: 'txn-001',
+    id: 1,
     name: 'MacBook Pro',
     description: 'Purchased new MacBook Pro for work',
     icon: '💻',
@@ -16,7 +16,7 @@ export const mockTransactions: Transaction[] = [
     status: TransactionStatus.COMPLETED,
   },
   {
-    id: 'txn-002',
+    id: 2,
     name: 'Summer T-shirts',
     description: 'Bought new T-shirts for summer',
     icon: '👕',
@@ -26,7 +26,7 @@ export const mockTransactions: Transaction[] = [
     status: TransactionStatus.COMPLETED,
   },
   {
-    id: 'txn-003',
+    id: 3,
     name: 'Garden Tools',
     description: 'Bought gardening tools',
     icon: '🏠',
@@ -36,7 +36,7 @@ export const mockTransactions: Transaction[] = [
     status: TransactionStatus.PENDING,
   },
   {
-    id: 'txn-004',
+    id: 4,
     name: 'Gym Membership',
     description: 'Annual gym membership fee',
     icon: '🏃',
@@ -46,7 +46,7 @@ export const mockTransactions: Transaction[] = [
     status: TransactionStatus.COMPLETED,
   },
   {
-    id: 'txn-005',
+    id: 5,
     name: 'Book Purchase',
     description: 'Bought development books',
     icon: '📚',
@@ -56,7 +56,7 @@ export const mockTransactions: Transaction[] = [
     status: TransactionStatus.COMPLETED,
   },
   {
-    id: 'txn-006',
+    id: 6,
     name: 'Board Game',
     description: 'Gifted board game',
     icon: '🎁',
@@ -66,7 +66,7 @@ export const mockTransactions: Transaction[] = [
     status: TransactionStatus.CANCELLED,
   },
   {
-    id: 'txn-007',
+    id: 7,
     name: 'Skincare Products',
     description: 'Purchased skincare essentials',
     icon: '💄',
@@ -76,7 +76,7 @@ export const mockTransactions: Transaction[] = [
     status: TransactionStatus.COMPLETED,
   },
   {
-    id: 'txn-008',
+    id: 8,
     name: 'Car Maintenance',
     description: 'Changed car tires and oil',
     icon: '🚗',
@@ -86,7 +86,7 @@ export const mockTransactions: Transaction[] = [
     status: TransactionStatus.PENDING,
   },
   {
-    id: 'txn-009',
+    id: 9,
     name: 'May Salary',
     description: 'Monthly salary credited',
     icon: '💰',
@@ -96,7 +96,7 @@ export const mockTransactions: Transaction[] = [
     status: TransactionStatus.COMPLETED,
   },
   {
-    id: 'txn-010',
+    id: 10,
     name: 'Freelance Website',
     description: 'Payment from freelance web development',
     icon: '💰',
@@ -106,7 +106,7 @@ export const mockTransactions: Transaction[] = [
     status: TransactionStatus.COMPLETED,
   },
   {
-    id: 'txn-011',
+    id: 11,
     name: 'Stock Dividends',
     description: 'Received dividends from investments',
     icon: '💰',
