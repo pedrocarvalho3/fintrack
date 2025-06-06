@@ -4,7 +4,7 @@ import DashboardGrid from './components/DashboardGrid';
 export default function DashboardContainer() {
   return (
     <div className="space-y-6">
-      <Title>Dashboard</Title>
+      <Title>System Overview</Title>
       <DashboardGrid />
     </div>
   );
