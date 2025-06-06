@@ -58,7 +58,7 @@ export default function TransactionTable({
                   updateTransaction.setUpdateTransactionDialogOpen(true);
                 }}
               >
-                <Pencil className="ml-2 h-4 w-4" />
+                <Pencil className="h-4 w-4" />
               </Button>
               <Button
                 variant="secondary"
@@ -68,7 +68,7 @@ export default function TransactionTable({
                   deleteTransaction.setDeleteDialogOpen(true);
                 }}
               >
-                <Trash2 className="ml-2 h-4 w-4 text-red-500" />
+                <Trash2 className="h-4 w-4 text-red-500" />
               </Button>
             </TableCell>
           </TableRow>
