@@ -1,6 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ArrowDownToLineIcon, Ellipsis, TrendingUp } from 'lucide-react';
+import { DollarSign, Ellipsis, TrendingUp } from 'lucide-react';
 
 export default function BalanceCard() {
   return (
@@ -8,7 +8,7 @@ export default function BalanceCard() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="flex items-center justify-center rounded-full border-2 p-2">
-            <ArrowDownToLineIcon className="h-4 w-4 text-gray-600" />{' '}
+            <DollarSign className="h-4 w-4 text-gray-600" />{' '}
           </div>
           <h3 className="text-xl">Balance</h3>
         </div>
