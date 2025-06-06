@@ -8,28 +8,20 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import PreferencesCard from './PreferencesCard';
+import { Label } from '@/components/ui/label';
 
-export default function SettingsCard() {
+export default function SettingsTabs() {
   return (
-    <Tabs defaultValue="account">
+    <Tabs defaultValue="preferences">
       <TabsList>
         <TabsTrigger value="preferences">Preferences</TabsTrigger>
         <TabsTrigger value="account">Account</TabsTrigger>
         <TabsTrigger value="password">Password</TabsTrigger>
       </TabsList>
       <TabsContent value="preferences">
-        <Card>
-          <CardHeader>
-            <CardTitle>Preferences</CardTitle>
-            <CardDescription>
-              Make changes to your preferences here. Click save when you&apos;re
-              done.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="grid gap-6"></CardContent>
-        </Card>
+        <PreferencesCard />
       </TabsContent>
       <TabsContent value="account">
         <Card>
