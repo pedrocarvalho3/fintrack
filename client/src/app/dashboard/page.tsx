@@ -1,5 +1,5 @@
-import Title from '@/components/blocks/Title';
+import DashboardContainer from './DashboardContainer';
 
 export default function Page() {
-  return <Title>System Overview</Title>;
+  return <DashboardContainer />;
 }
