@@ -27,7 +27,12 @@ export default function IncomeCard() {
           12.5% <TrendingUp className="ml-2 h-4 w-4" />
         </Badge>
       </div>
-      <div></div>
+      <div>
+        <p className="text-gray-500">
+          You made an extra <span className="text-green-700">$1,200.00</span>{' '}
+          this month
+        </p>
+      </div>
     </div>
   );
 }
