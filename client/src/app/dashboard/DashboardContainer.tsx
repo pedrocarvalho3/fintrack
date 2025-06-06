@@ -2,10 +2,9 @@
 
 import Title from '@/components/blocks/Title';
 import DashboardGrid from './components/DashboardGrid';
-import { TransactionProvider } from './transactions/context/TransactionContext';
-import TransactionsTable from './transactions/components/TransactionsTable';
 import { TransactionStatus } from './transactions/types';
 import { mockCategories } from '@/mocks/mock-categories';
+import TransactionsPreview from './components/TransactionsPreview';
 
 export default function DashboardContainer() {
   const transactions = [
@@ -33,9 +32,7 @@ export default function DashboardContainer() {
     <div className="space-y-6">
       <Title>System Overview</Title>
       <DashboardGrid />
-      <TransactionProvider>
-        <TransactionsTable transactions={transactions} isRecent />
-      </TransactionProvider>
+      <TransactionsPreview transactions={transactions} />
     </div>
   );
 }

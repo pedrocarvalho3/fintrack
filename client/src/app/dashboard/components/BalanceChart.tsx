@@ -59,9 +59,9 @@ export default function BalanceChart() {
           </PieChart>
         </ResponsiveContainer>
       </ChartContainer>
-      <div className="mt-4 flex flex-row gap-2">
+      <div className="mt-4 flex flex-row gap-4">
         {data.map((item, index) => (
-          <div key={index} className="flex items-center gap-2">
+          <div key={index} className="flex items-center gap-1">
             <div
               className="h-3 w-3 rounded-full"
               style={{ backgroundColor: item.color }}

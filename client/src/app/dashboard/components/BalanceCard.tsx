@@ -10,7 +10,7 @@ export default function BalanceCard() {
           <div className="flex items-center justify-center rounded-full border-2 p-2">
             <ArrowDownToLineIcon className="h-4 w-4 text-gray-600" />{' '}
           </div>
-          <h3 className="text-xl">My Balance</h3>
+          <h3 className="text-xl">Balance</h3>
         </div>
         <div>
           <Button variant="ghost">
