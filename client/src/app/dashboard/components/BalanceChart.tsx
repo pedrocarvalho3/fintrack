@@ -17,7 +17,7 @@ const data = [
 
 export default function BalanceChart() {
   return (
-    <div className="mt-6 flex flex-col items-center justify-center">
+    <div className="mt-4 flex flex-col items-center justify-center">
       <h4 className="mb-2 font-medium">Balance Distribution</h4>
       <ChartContainer
         config={{
@@ -38,7 +38,7 @@ export default function BalanceChart() {
             color: 'hsl(var(--chart-4))',
           },
         }}
-        className="h-[260px]"
+        className="h-[240px]"
       >
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>

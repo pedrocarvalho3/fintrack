@@ -6,7 +6,7 @@ import { TransactionProvider } from './context/TransactionContext';
 import CreateTransactionDialog from './components/CreateTransactionDialog';
 import UpdateTransactionDialog from './components/UpdateTransactionDialog';
 import DeleteTransactionDialog from './components/DeleteTransactionDialog';
-import TransactionTable from './components/TransactionTable';
+import TransactionTable from './components/TransactionsTable';
 import { useTransactions } from './hooks/useTransactions';
 import { useState } from 'react';
 import Pagination from '@/components/blocks/Pagination';
