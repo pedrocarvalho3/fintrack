@@ -12,8 +12,7 @@ var DB *sql.DB
 func Connect() {
 	var err error
 
-	// Exemplo: postgres://usuario:senha@host:porta/banco?sslmode=disable
-	connStr := "postgres://postgres:postgres@localhost:5432/financas?sslmode=disable"
+	connStr := "postgres://postgres:postgres@localhost:5432/fintrack-db?sslmode=disable"
 	DB, err = sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatal("Error to open connection:", err)
@@ -21,7 +20,7 @@ func Connect() {
 
 	err = DB.Ping()
 	if err != nil {
-		log.Fatal("Erro to connect database:", err)
+		log.Fatal("Error to connect database:", err)
 	}
 
 	createTables()
@@ -29,15 +28,15 @@ func Connect() {
 
 func createTables() {
 	query := `
-	CREATE TABLE IF NOT EXISTS usuarios (
+	CREATE TABLE IF NOT EXISTS users (
 		id SERIAL PRIMARY KEY,
-		nome TEXT NOT NULL,
+		name TEXT NOT NULL,
 		email TEXT NOT NULL UNIQUE,
-		senha TEXT NOT NULL
+		password TEXT NOT NULL
 	);
 	`
 	if _, err := DB.Exec(query); err != nil {
-		log.Fatal("Erro ao criar tabelas:", err)
+		log.Fatal("Error to create tables:", err)
 	}
 }
 
