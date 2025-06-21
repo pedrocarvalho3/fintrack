@@ -17,9 +17,10 @@ type Category struct {
 	ID     int          `json:"id"`
 	Name   string       `json:"name"`
 	Status StatusType   `json:"status"`
-	Icon   int          `json:"icon"`
-	Color  int          `json:"color"`
+	Icon   string          `json:"icon"`
+	Color  string          `json:"color"`
 	Type   CategoryType `json:"type"`
+	UserID int          `json:"user_id"`
 }
 
 func CreateCategoryTableSQL() string {
@@ -30,6 +31,7 @@ func CreateCategoryTableSQL() string {
 		status INTEGER NOT NULL,
 		icon INTEGER NOT NULL,
 		color INTEGER NOT NULL,
-		type INTEGER NOT NULL
+		type INTEGER NOT NULL,
+		user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
 	);`
 }
