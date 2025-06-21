@@ -4,9 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import RegisterCard from './components/RegisterCard';
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +27,12 @@ export default function RegisterPage() {
         <Button variant="ghost">Already have an account? Sign in</Button>
       </Link>
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-        <div className="absolute inset-0 bg-zinc-900" />
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: "url('https://picsum.photos/1200/1600')",
+          }}
+        />
         <div className="relative z-20 flex items-center text-lg font-medium">
           <Image
             src="/logo_light.svg"
@@ -58,57 +61,7 @@ export default function RegisterPage() {
               Enter your details below to create your account
             </p>
           </div>
-          <Card>
-            <form onSubmit={onSubmit}>
-              <CardContent className="grid gap-4 pt-6">
-                <div className="grid gap-2">
-                  <Label htmlFor="name">Full Name</Label>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="John Doe"
-                    autoCapitalize="words"
-                    autoComplete="name"
-                    autoCorrect="off"
-                    disabled={isLoading}
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="name@example.com"
-                    autoCapitalize="none"
-                    autoComplete="email"
-                    autoCorrect="off"
-                    disabled={isLoading}
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="password">Password</Label>
-                  <Input id="password" type="password" disabled={isLoading} />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="confirm-password">Confirm Password</Label>
-                  <Input
-                    id="confirm-password"
-                    type="password"
-                    disabled={isLoading}
-                  />
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button className="w-full" disabled={isLoading}>
-                  {isLoading ? (
-                    <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
-                  ) : (
-                    'Create Account'
-                  )}
-                </Button>
-              </CardFooter>
-            </form>
-          </Card>
+          <RegisterCard onSubmit={onSubmit} isLoading={isLoading} />
           <p className="px-8 text-center text-sm text-muted-foreground">
             By clicking create account, you agree to our{' '}
             <Link
