@@ -14,5 +14,6 @@ export interface Category {
   transactionCount: number;
   status: StatusType;
   icon: string;
+  color: string;
   type: CategoryType;
 }
