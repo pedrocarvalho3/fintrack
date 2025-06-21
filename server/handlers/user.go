@@ -10,16 +10,10 @@ import (
 	"golang.org/x/crypto/bcrypt"
 
 	"github.com/pedrocarvalho3/fintrack-server/database"
+	"github.com/pedrocarvalho3/fintrack-server/models"
 )
 
 var jwtKey = []byte(os.Getenv("JWT_SECRET"))
-
-type User struct {
-	ID	int `json:"id"`
-	Name string `json:"name"`
-	Email string `json:"email"`
-	Password string `json:"password,omitempty"`
-}
 
 type UserResponse struct {
 	ID    int    `json:"id"`
@@ -28,7 +22,7 @@ type UserResponse struct {
 }
 
 func RegisterHandler(w http.ResponseWriter, r *http.Request) {
-	var u User
+	var u models.User
 	json.NewDecoder(r.Body).Decode(&u)
 
 	hash, _ := bcrypt.GenerateFromPassword([]byte(u.Password), 14)
@@ -49,10 +43,10 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
-	var creds User
+	var creds models.User
 	json.NewDecoder(r.Body).Decode(&creds)
 
-	var u User 
+	var u models.User 
 	row := database.DB.QueryRow("SELECT id, name, email, password FROM users WHERE email = $1", creds.Email)
 	err := row.Scan(&u.ID, &u.Name, &u.Email, &u.Password)
 	if err != nil {
@@ -84,7 +78,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 func ProfileHandler(w http.ResponseWriter, r *http.Request) {
 	userID := r.Context().Value("user_id")
 
-	var u User 
+	var u models.User 
 	row := database.DB.QueryRow("SELECT id, name, email, password FROM users WHERE id = $1", userID)
 	err := row.Scan(&u.ID, &u.Name, &u.Email, &u.Password)
 	if err != nil {
