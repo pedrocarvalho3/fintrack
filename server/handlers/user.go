@@ -3,6 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -11,7 +12,7 @@ import (
 	"github.com/pedrocarvalho3/fintrack-server/database"
 )
 
-var jwtKey = []byte("JHDFASUHEW_73289")
+var jwtKey = []byte(os.Getenv("JWT_SECRET"))
 
 type User struct {
 	ID	int `json:"id"`
@@ -25,7 +26,6 @@ type UserResponse struct {
 	Name  string `json:"name"`
 	Email string `json:"email"`
 }
-
 
 func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	var u User
