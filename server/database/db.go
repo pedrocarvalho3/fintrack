@@ -44,6 +44,7 @@ func createTables() {
 	queries := []string{
 		models.CreateUserTableSQL(),
 		models.CreateCategoryTableSQL(),
+		models.CreateTransactionTableSQL(),
 	}
 
 	for _, query := range queries {
