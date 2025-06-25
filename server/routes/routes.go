@@ -4,15 +4,15 @@ import (
 	"net/http"
 
 	"github.com/pedrocarvalho3/fintrack-server/handlers"
-	"github.com/pedrocarvalho3/fintrack-server/middleware"
+	"github.com/pedrocarvalho3/fintrack-server/middlewares"
 )
 
 func RegisterRoutes() {
 	http.HandleFunc("/register", handlers.RegisterHandler)
 	http.HandleFunc("/login", handlers.LoginHandler)
-	http.HandleFunc("/profile", middleware.AuthMiddleware(handlers.ProfileHandler))
+	http.HandleFunc("/profile", middlewares.AuthMiddleware(handlers.ProfileHandler))
 
-	http.HandleFunc("/categories", middleware.AuthMiddleware(func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/categories", middlewares.AuthMiddleware(func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
 			handlers.GetCategories(w, r)
@@ -23,7 +23,7 @@ func RegisterRoutes() {
 		}
 	}))
 
-	http.HandleFunc("/category", middleware.AuthMiddleware(func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/category", middlewares.AuthMiddleware(func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
 			handlers.GetCategory(w, r)
@@ -36,7 +36,7 @@ func RegisterRoutes() {
 		}
 	}))
 
-	http.HandleFunc("/transactions", middleware.AuthMiddleware(func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/transactions", middlewares.AuthMiddleware(func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
 			handlers.GetTransactions(w, r)
@@ -47,7 +47,7 @@ func RegisterRoutes() {
 		}
 	}))
 
-	http.HandleFunc("/transaction", middleware.AuthMiddleware(func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/transaction", middlewares.AuthMiddleware(func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
 			handlers.GetTransaction(w, r)
