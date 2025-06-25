@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ui/theme-provider';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryCLient } from '@/lib/react-query';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -34,7 +36,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main>{children}</main>
+          <QueryClientProvider client={queryCLient}>
+            <main>{children}</main>
+          </QueryClientProvider>
         </ThemeProvider>
       </body>
     </html>
