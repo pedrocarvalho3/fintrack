@@ -22,24 +22,39 @@ type UserResponse struct {
 }
 
 func RegisterHandler(w http.ResponseWriter, r *http.Request) {
-	var u models.User
-	json.NewDecoder(r.Body).Decode(&u)
+	w.Header().Set("Content-Type", "application/json")
 
-	hash, _ := bcrypt.GenerateFromPassword([]byte(u.Password), 14)
-	
-	stmt, err := database.DB.Prepare("INSERT INTO users(name, email, password) VALUES ($1, $2, $3)")
-	if err != nil {
-		http.Error(w, err.Error(), 500)
+	var u models.User
+	if err := json.NewDecoder(r.Body).Decode(&u); err != nil {
+		http.Error(w, `{"message": "Invalid JSON"}`, http.StatusBadRequest)
 		return
 	}
 
+	hash, err := bcrypt.GenerateFromPassword([]byte(u.Password), bcrypt.DefaultCost)
+	if err != nil {
+		http.Error(w, `{"message": "Internal error hashing password"}`, http.StatusInternalServerError)
+		return
+	}
+	
+	stmt, err := database.DB.Prepare("INSERT INTO users(name, email, password) VALUES ($1, $2, $3)")
+	if err != nil {
+		http.Error(w, `{"message": "Internal database error"}`, http.StatusInternalServerError)
+		return
+	}
+	defer stmt.Close()
+
 	_, err = stmt.Exec(u.Name, u.Email, string(hash))
 	if err != nil {
-		http.Error(w, "Email registered", 400)
+		if strings.Contains(err.Error(), "duplicate key") {
+			http.Error(w, `{"message": "Email already registered"}`, http.StatusBadRequest)
+		} else {
+			http.Error(w, `{"message": "Database error"}`, http.StatusInternalServerError)
+		}
 		return
 	}
 
 	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(map[string]string{"message": "User registered successfully"})
 }
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
