@@ -1,6 +1,7 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 type RegisterInput = { name: string; email: string; password: string };
@@ -9,6 +10,7 @@ type RegisterResponse = {
 };
 
 export function useRegister() {
+  const router = useRouter();
   return useMutation<RegisterResponse, Error, RegisterInput>({
     mutationFn: async data => {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/register`, {
@@ -33,6 +35,10 @@ export function useRegister() {
         duration: 3000,
         position: 'top-right',
       });
+
+      setTimeout(() => {
+        router.push('/login');
+      }, 3000);
 
       // queryClient.invalidateQueries(['currentUser']);
     },

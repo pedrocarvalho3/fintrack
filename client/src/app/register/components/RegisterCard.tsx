@@ -26,6 +26,8 @@ const registerSchema = z
 type RegisterSchema = z.infer<typeof registerSchema>;
 
 export default function RegisterCard() {
+  const { mutate, isPending } = useRegister();
+
   const {
     register,
     handleSubmit,
@@ -33,7 +35,6 @@ export default function RegisterCard() {
   } = useForm<RegisterSchema>({
     resolver: zodResolver(registerSchema),
   });
-  const { mutate, isLoading } = useRegister();
 
   function onSubmit(data: RegisterSchema) {
     const { name, email, password } = data;
@@ -53,7 +54,7 @@ export default function RegisterCard() {
               autoCapitalize="words"
               autoComplete="name"
               autoCorrect="off"
-              disabled={isLoading}
+              disabled={isPending}
               {...register('name')}
             />
             {errors.name && <span>{errors.name.message}</span>}
@@ -67,7 +68,7 @@ export default function RegisterCard() {
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
-              disabled={isLoading}
+              disabled={isPending}
               {...register('email')}
             />
             {errors.email && <span>{errors.email.message}</span>}
@@ -77,7 +78,7 @@ export default function RegisterCard() {
             <Input
               id="password"
               type="password"
-              disabled={isLoading}
+              disabled={isPending}
               {...register('password')}
             />
             {errors.password && <span>{errors.password.message}</span>}
@@ -87,7 +88,7 @@ export default function RegisterCard() {
             <Input
               id="confirm-password"
               type="password"
-              disabled={isLoading}
+              disabled={isPending}
               {...register('confirm_password')}
             />
             {errors.confirm_password && (
@@ -96,8 +97,8 @@ export default function RegisterCard() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full" disabled={isLoading}>
-            {isLoading ? (
+          <Button className="w-full" disabled={isPending}>
+            {isPending ? (
               <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
             ) : (
               'Create Account'
