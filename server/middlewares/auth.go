@@ -15,7 +15,7 @@ func AuthMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		authHeader := r.Header.Get("Authorization")
 		if authHeader == "" {
-			http.Error(w, "Token ausente", http.StatusUnauthorized)
+			http.Error(w, "Missing Token", http.StatusUnauthorized)
 			return
 		}
 
@@ -26,7 +26,7 @@ func AuthMiddleware(next http.HandlerFunc) http.HandlerFunc {
 			return JwtKey, nil
 		})
 		if err != nil || !token.Valid {
-			http.Error(w, "Token inválido", http.StatusUnauthorized)
+			http.Error(w, "Invalid Token", http.StatusUnauthorized)
 			return
 		}
 
