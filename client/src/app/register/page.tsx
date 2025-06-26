@@ -1,23 +1,9 @@
-'use client';
-
-import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import RegisterCard from './components/RegisterCard';
 
 export default function RegisterPage() {
-  const [isLoading, setIsLoading] = useState(false);
-
-  async function onSubmit(event: React.FormEvent) {
-    event.preventDefault();
-    setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-  }
-
   return (
     <div className="container relative grid min-h-screen flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
       <Link
@@ -61,7 +47,7 @@ export default function RegisterPage() {
               Enter your details below to create your account
             </p>
           </div>
-          <RegisterCard onSubmit={onSubmit} isLoading={isLoading} />
+          <RegisterCard />
           <p className="px-8 text-center text-sm text-muted-foreground">
             By clicking create account, you agree to our{' '}
             <Link
