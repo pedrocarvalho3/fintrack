@@ -16,7 +16,7 @@ export default function RegisterPage() {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: "url('https://picsum.photos/1200/1600')",
+            backgroundImage: "url('https://picsum.photos/2400/3200')",
           }}
         />
         <div className="relative z-20 flex items-center text-lg font-medium">
