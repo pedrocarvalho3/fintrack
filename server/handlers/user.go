@@ -11,6 +11,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 
 	"github.com/pedrocarvalho3/fintrack-server/database"
+	"github.com/pedrocarvalho3/fintrack-server/middlewares"
 	"github.com/pedrocarvalho3/fintrack-server/models"
 )
 
@@ -90,6 +91,28 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		"token": tokenString,
 	})
 }
+
+func ValidateTokenHandler(w http.ResponseWriter, r *http.Request) {
+	authHeader := r.Header.Get("Authorization")
+	if authHeader == "" {
+		http.Error(w, "Missing Token", http.StatusUnauthorized)
+		return
+	}
+
+	tokenString := strings.TrimPrefix(authHeader, "Bearer ")
+
+	claims := jwt.MapClaims{}
+	token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+		return middlewares.JwtKey, nil
+	})
+	if err != nil || !token.Valid {
+		http.Error(w, "Invalid Token", http.StatusUnauthorized)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
+
 
 func ProfileHandler(w http.ResponseWriter, r *http.Request) {
 	userID := r.Context().Value("user_id")

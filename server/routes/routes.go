@@ -11,6 +11,7 @@ func RegisterRoutes() {
 	http.HandleFunc("/register", handlers.RegisterHandler)
 	http.HandleFunc("/login", handlers.LoginHandler)
 	http.HandleFunc("/profile", middlewares.AuthMiddleware(handlers.ProfileHandler))
+	http.HandleFunc("/auth/validate", middlewares.AuthMiddleware(handlers.ValidateTokenHandler))
 
 	http.HandleFunc("/categories", middlewares.AuthMiddleware(func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
