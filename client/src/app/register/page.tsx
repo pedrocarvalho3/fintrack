@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import RegisterCard from './components/RegisterCard';
+import RegisterForm from './components/RegisterForm';
 
 export default function RegisterPage() {
   return (
@@ -47,7 +47,7 @@ export default function RegisterPage() {
               Enter your details below to create your account
             </p>
           </div>
-          <RegisterCard />
+          <RegisterForm />
           <p className="px-8 text-center text-sm text-muted-foreground">
             By clicking create account, you agree to our{' '}
             <Link

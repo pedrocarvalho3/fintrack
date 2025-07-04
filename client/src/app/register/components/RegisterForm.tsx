@@ -25,7 +25,7 @@ const registerSchema = z
 
 type RegisterSchema = z.infer<typeof registerSchema>;
 
-export default function RegisterCard() {
+export default function RegisterForm() {
   const { mutate, isPending } = useRegister();
 
   const {
@@ -37,8 +37,7 @@ export default function RegisterCard() {
   });
 
   function onSubmit(data: RegisterSchema) {
-    const { name, email, password } = data;
-    mutate({ name, email, password });
+    mutate(data);
   }
 
   return (
