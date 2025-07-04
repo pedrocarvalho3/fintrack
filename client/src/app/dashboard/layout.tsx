@@ -1,11 +1,16 @@
+'use client';
+
 import { AppSidebar } from '@/components/blocks/AppSidebar';
 import { SidebarProvider } from '@/components/ui/sidebar';
+import { useAuthGuard } from '@/hooks/use-auth-guard';
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  useAuthGuard();
+
   return (
     <SidebarProvider>
       <AppSidebar>
