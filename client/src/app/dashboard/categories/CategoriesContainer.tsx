@@ -14,7 +14,16 @@ import UpdateCategoryDialog from './components/UpdateCategoryDialog';
 
 export default function CategoriesContainer() {
   const [currentPage, setCurrentPage] = useState(1);
-  const { categories } = useCategories(currentPage, 9);
+
+  const getCategories = {
+    page: currentPage,
+    limit: 9,
+  };
+
+  const { data, isLoading, isError } = useCategories(getCategories);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Erro ao carregar categorias</div>;
 
   return (
     <CategoryProvider>
@@ -25,9 +34,9 @@ export default function CategoriesContainer() {
           handleSearch={() => {}}
           handleRefresh={() => {}}
         />
-        <CategoryGrid categories={categories} />
+        <CategoryGrid categories={data?.data || []} />
         <Pagination
-          totalPages={10}
+          totalPages={data?.totalPages || 1}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />

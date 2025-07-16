@@ -1,25 +1,39 @@
-import { useState } from 'react';
 import { Category } from '../types';
-import { mockCategories } from '@/mocks/mock-categories';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
-export function useCategories(page: number, limit: number) {
-  const [categories] = useState<Category[]>(mockCategories);
-  const [loading] = useState(false);
-  const [error] = useState<string | null>(null);
+type CategoriesRequest = {
+  page: number;
+  limit: number;
+};
 
-  const paginatedCategories = categories.slice(
-    (page - 1) * limit,
-    page * limit,
-  );
+type CategoriesResponse = {
+  data: Category[];
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+};
 
-  //   useEffect(() => {
-  //     setLoading(true);
-  //     fetch(`/api/categories?page=${page}`)
-  //       .then(res => res.json())
-  //       .then(data => setCategories(data))
-  //       .catch(err => setError(err.message))
-  //       .finally(() => setLoading(false));
-  //   }, [page]);
+export function useCategories({ page, limit }: CategoriesRequest) {
+  const token =
+    typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null;
 
-  return { categories: paginatedCategories, loading, error };
+  return useQuery<CategoriesResponse>({
+    queryKey: ['categories', page, limit],
+    queryFn: async () => {
+      const response = await axios.get<CategoriesResponse>(
+        `${process.env.NEXT_PUBLIC_API_URL}/categories`,
+        {
+          params: { page, limit },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+
+      return response.data;
+    },
+    staleTime: 1000 * 60,
+  });
 }
