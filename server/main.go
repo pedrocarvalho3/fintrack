@@ -9,10 +9,12 @@ import (
 	"github.com/pedrocarvalho3/fintrack-server/database"
 	"github.com/pedrocarvalho3/fintrack-server/middlewares"
 	"github.com/pedrocarvalho3/fintrack-server/routes"
+	"github.com/pedrocarvalho3/fintrack-server/seeders"
 )
 
 func main() {
 	database.Connect()
+	seeders.SeedCategories()
 
 	routes.RegisterRoutes()
 	

@@ -29,8 +29,8 @@ func CreateCategoryTableSQL() string {
 		id SERIAL PRIMARY KEY,
 		name TEXT NOT NULL,
 		status INTEGER NOT NULL,
-		icon INTEGER NOT NULL,
-		color INTEGER NOT NULL,
+		icon TEXT NOT NULL,
+		color TEXT NOT NULL,
 		type INTEGER NOT NULL,
 		user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
 	);`
