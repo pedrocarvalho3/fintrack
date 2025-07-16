@@ -35,9 +35,7 @@ export function useLogin() {
         position: 'top-right',
       });
 
-      setTimeout(() => {
-        router.push('/dashboard');
-      }, 3000);
+      router.push('/dashboard');
     },
     onError: err => {
       const msg = err.message.toLowerCase();

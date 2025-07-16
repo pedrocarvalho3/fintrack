@@ -36,9 +36,7 @@ export function useRegister() {
         position: 'top-right',
       });
 
-      setTimeout(() => {
-        router.push('/login');
-      }, 3000);
+      router.push('/login');
 
       // queryClient.invalidateQueries(['currentUser']);
     },
