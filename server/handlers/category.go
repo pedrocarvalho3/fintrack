@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"math"
 	"net/http"
 	"strconv"
 
@@ -36,9 +37,37 @@ func CreateCategory(w http.ResponseWriter, r *http.Request) {
 
 func GetCategories(w http.ResponseWriter, r *http.Request) {
 	userID := r.Context().Value("user_id")
-	rows, err := database.DB.Query("SELECT id, name, status, icon, color, type FROM categories WHERE user_id = $1", userID)
+
+	pageStr := r.URL.Query().Get("page")
+	limitStr := r.URL.Query().Get("limit")
+
+	page := 1
+	limit := 10
+
+	if p, err := strconv.Atoi(pageStr); err == nil && p > 0 {
+		page = p
+	}
+	if l, err := strconv.Atoi(limitStr); err == nil && l > 0 {
+		limit = l
+	}
+
+	offset := (page - 1) * limit
+
+	var total int
+	err := database.DB.QueryRow("SELECT COUNT(*) FROM categories WHERE user_id = $1", userID).Scan(&total)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, "Error counting categories: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	rows, err := database.DB.Query(`
+		SELECT id, name, status, icon, color, type
+		FROM categories
+		WHERE user_id = $1
+		ORDER BY id
+		LIMIT $2 OFFSET $3`, userID, limit, offset)
+	if err != nil {
+		http.Error(w, "Error fetching categories: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
 	defer rows.Close()
@@ -58,8 +87,18 @@ func GetCategories(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	json.NewEncoder(w).Encode(categories)
+	response := map[string]interface{}{
+		"data":       categories,
+		"page":       page,
+		"limit":      limit,
+		"total":      total,
+		"totalPages": int(math.Ceil(float64(total) / float64(limit))),
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
+
 
 func GetCategory(w http.ResponseWriter, r *http.Request) {
 	idStr := r.URL.Query().Get("id")
