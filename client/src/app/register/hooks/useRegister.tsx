@@ -3,31 +3,36 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import axios, { AxiosError } from 'axios';
 
-type RegisterInput = { name: string; email: string; password: string };
+type RegisterRequest = { name: string; email: string; password: string };
+
 type RegisterResponse = {
   message: string;
 };
 
 export function useRegister() {
   const router = useRouter();
-  return useMutation<RegisterResponse, Error, RegisterInput>({
+
+  return useMutation<RegisterResponse, Error, RegisterRequest>({
     mutationFn: async data => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      try {
+        const response = await axios.post<RegisterResponse>(
+          `${process.env.NEXT_PUBLIC_API_URL}/register`,
+          data,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          },
+        );
 
-      console.log(res);
-
-      const responseBody = await res.json();
-
-      if (!res.ok) {
-        throw new Error(responseBody.message || 'Registration failed');
+        return response.data;
+      } catch (error) {
+        const err = error as AxiosError<{ message?: string }>;
+        const message = err.response?.data?.message || 'Registration failed';
+        throw new Error(message);
       }
-
-      return responseBody;
     },
     onSuccess: () => {
       toast.success('Registration successful', {

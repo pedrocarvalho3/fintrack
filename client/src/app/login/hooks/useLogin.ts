@@ -3,28 +3,34 @@
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import axios, { AxiosError } from 'axios';
 
-type LoginInput = { email: string; password: string };
+type LoginRequest = { email: string; password: string };
+
 type LoginResponse = { token: string };
 
 export function useLogin() {
   const router = useRouter();
 
-  return useMutation<LoginResponse, Error, LoginInput>({
+  return useMutation<LoginResponse, Error, LoginRequest>({
     mutationFn: async data => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      try {
+        const response = await axios.post<LoginResponse>(
+          `${process.env.NEXT_PUBLIC_API_URL}/login`,
+          data,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          },
+        );
 
-      const responseBody = await res.json();
-
-      if (!res.ok) {
-        throw new Error(responseBody.message || 'Login failed');
+        return response.data;
+      } catch (error) {
+        const err = error as AxiosError<{ message?: string }>;
+        const message = err.response?.data?.message || 'Login failed';
+        throw new Error(message);
       }
-
-      return responseBody;
     },
     onSuccess: data => {
       localStorage.setItem('auth_token', data.token);
