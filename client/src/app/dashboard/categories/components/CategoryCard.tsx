@@ -17,8 +17,15 @@ export default function CategoryCard({ category }: CategoryCardProps) {
   return (
     <Card
       key={category.id}
-      className="overflow-hidden transition-shadow hover:shadow-lg"
+      className="relative overflow-hidden transition-shadow hover:shadow-lg"
     >
+      <div
+        className="absolute left-0 top-0 h-full w-2 transition-all duration-300 group-hover:w-2"
+        style={{
+          backgroundColor: category.color,
+          clipPath: 'polygon(0 0, 100% 15%, 100% 85%, 0 100%)',
+        }}
+      />
       <CardContent className="py-4">
         <div className="flex flex-col gap-8">
           <div className="flex justify-between">
@@ -58,7 +65,7 @@ export default function CategoryCard({ category }: CategoryCardProps) {
           </div>
         </div>
       </CardContent>
-      <CardFooter className="flex justify-end gap-2">
+      <CardFooter className="relative flex justify-end gap-2">
         <Button
           variant="outline"
           onClick={() => {

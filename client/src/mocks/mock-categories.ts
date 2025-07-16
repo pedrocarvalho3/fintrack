@@ -7,6 +7,7 @@ export const mockCategories = [
     transactionCount: 245,
     status: StatusType.ACTIVE,
     icon: '💻',
+    color: '#000000',
     type: CategoryType.EXPENSE,
   },
   {
@@ -15,6 +16,7 @@ export const mockCategories = [
     transactionCount: 189,
     status: StatusType.ACTIVE,
     icon: '👕',
+    color: '#000000',
     type: CategoryType.EXPENSE,
   },
   {
@@ -23,6 +25,7 @@ export const mockCategories = [
     transactionCount: 156,
     status: StatusType.INACTIVE,
     icon: '🏠',
+    color: '#000000',
     type: CategoryType.EXPENSE,
   },
   {
@@ -31,6 +34,7 @@ export const mockCategories = [
     transactionCount: 98,
     status: StatusType.ACTIVE,
     icon: '🏃',
+    color: '#000000',
     type: CategoryType.EXPENSE,
   },
   {
@@ -39,6 +43,7 @@ export const mockCategories = [
     transactionCount: 67,
     status: StatusType.ACTIVE,
     icon: '📚',
+    color: '#000000',
     type: CategoryType.EXPENSE,
   },
   {
@@ -47,6 +52,7 @@ export const mockCategories = [
     transactionCount: 134,
     status: StatusType.INACTIVE,
     icon: '🎁',
+    color: '#000000',
     type: CategoryType.EXPENSE,
   },
   {
@@ -55,6 +61,7 @@ export const mockCategories = [
     transactionCount: 89,
     status: StatusType.ACTIVE,
     icon: '💄',
+    color: '#000000',
     type: CategoryType.EXPENSE,
   },
   {
@@ -63,6 +70,7 @@ export const mockCategories = [
     transactionCount: 45,
     status: StatusType.ACTIVE,
     icon: '🚗',
+    color: '#000000',
     type: CategoryType.EXPENSE,
   },
   {
@@ -71,6 +79,7 @@ export const mockCategories = [
     transactionCount: 34,
     status: StatusType.ACTIVE,
     icon: '💰',
+    color: '#000000',
     type: CategoryType.INCOME,
   },
   {
@@ -79,6 +88,7 @@ export const mockCategories = [
     transactionCount: 34,
     status: StatusType.ACTIVE,
     icon: '💰',
+    color: '#000000',
     type: CategoryType.INCOME,
   },
   {
@@ -87,6 +97,7 @@ export const mockCategories = [
     transactionCount: 34,
     status: StatusType.ACTIVE,
     icon: '💰',
+    color: '#000000',
     type: CategoryType.INCOME,
   },
 ];
