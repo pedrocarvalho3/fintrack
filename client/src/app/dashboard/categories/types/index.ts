@@ -1,11 +1,11 @@
 export enum CategoryType {
-  INCOME = 'INCOME',
-  EXPENSE = 'EXPENSE',
+  INCOME = 0,
+  EXPENSE = 1,
 }
 
 export enum StatusType {
-  ACTIVE = 'ACTIVE',
-  INACTIVE = 'INACTIVE',
+  ACTIVE = 1,
+  INACTIVE = 0,
 }
 
 export interface Category {
