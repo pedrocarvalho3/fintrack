@@ -1,6 +1,6 @@
 'use client';
 
-import { Home, Wallet, FolderTree, Info, LogOut, Settings } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 import Image from 'next/image';
 
 import {
@@ -19,37 +19,13 @@ import {
 import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { useTheme } from 'next-themes';
-
-const items = [
-  {
-    title: 'Dashboard',
-    url: '/dashboard',
-    icon: Home,
-  },
-  {
-    title: 'Transactions',
-    url: '/dashboard/transactions',
-    icon: Wallet,
-  },
-  {
-    title: 'Categories',
-    url: '/dashboard/categories',
-    icon: FolderTree,
-  },
-  {
-    title: 'Settings',
-    url: '/dashboard/settings',
-    icon: Settings,
-  },
-  {
-    title: 'About',
-    url: '/dashboard/about',
-    icon: Info,
-  },
-];
+import { Button } from '@/components/ui/button';
+import { useLogout } from '@/hooks/use-logout';
+import { navItems } from '@/mocks/mock-navigation-items';
 
 export function AppSidebar({ children }: { children: React.ReactNode }) {
   const { theme } = useTheme();
+  const logout = useLogout();
 
   return (
     <>
@@ -85,7 +61,7 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
             </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {items.map(item => (
+                {navItems.map(item => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild>
                       <Link href={item.url}>
@@ -104,13 +80,10 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a
-                  href="#"
-                  className="text-sidebar-foreground/70 hover:text-sidebar-foreground"
-                >
+                <Button onClick={logout} variant="ghost">
                   <LogOut />
                   <span>Logout</span>
-                </a>
+                </Button>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
