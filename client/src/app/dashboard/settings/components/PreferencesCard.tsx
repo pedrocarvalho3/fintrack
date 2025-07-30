@@ -15,7 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useCurrency, type SupportedCurrency } from '@/hooks/use-currency';
+import { useCurrency, type SupportedCurrency } from '@/hooks/useCurrency';
 
 export default function PreferencesCard() {
   const { currency, setCurrency, currencies } = useCurrency();

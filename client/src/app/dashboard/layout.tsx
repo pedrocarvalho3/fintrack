@@ -2,7 +2,7 @@
 
 import { AppSidebar } from '@/components/blocks/AppSidebar';
 import { SidebarProvider } from '@/components/ui/sidebar';
-import { useAuthGuard } from '@/hooks/use-auth-guard';
+import { useAuthGuard } from '@/hooks/useAuthGuard';
 
 export default function RootLayout({
   children,

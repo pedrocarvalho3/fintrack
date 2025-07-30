@@ -20,7 +20,7 @@ import Link from 'next/link';
 import { Header } from '@/components/layout/Header';
 import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
-import { useLogout } from '@/hooks/use-logout';
+import { useLogout } from '@/hooks/useLogout';
 import { navItems } from '@/mocks/mock-navigation-items';
 
 export function AppSidebar({ children }: { children: React.ReactNode }) {
