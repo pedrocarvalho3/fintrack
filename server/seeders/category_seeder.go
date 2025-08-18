@@ -8,16 +8,23 @@ import (
 	"github.com/pedrocarvalho3/fintrack-server/database"
 	"github.com/pedrocarvalho3/fintrack-server/models"
 	"github.com/pedrocarvalho3/fintrack-server/utils"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func SeedCategories() {
 	rand.Seed(time.Now().UnixNano())
 
-	_, err := database.DB.Exec(`
+	hashed_password, err := bcrypt.GenerateFromPassword([]byte("123456"), bcrypt.DefaultCost)
+	if err != nil {
+		log.Fatalf("Internal error hashing password")
+		return
+	}
+
+	_, err = database.DB.Exec(`
 		INSERT INTO users (id, name, email, password)
-		VALUES (1, 'Seeder User', 'seeder@example.com', 'hashed_password')
+		VALUES ($1, $2, $3, $4)
 		ON CONFLICT (id) DO NOTHING;
-	`)
+	`, 1, "Seeder User", "seeder@example.com", string(hashed_password))
 	if err != nil {
 		log.Fatalf("Erro ao inserir usuário: %v", err)
 	}
