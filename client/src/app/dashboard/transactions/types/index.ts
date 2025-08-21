@@ -1,4 +1,4 @@
-import { Category } from '../../categories/types';
+import { Category } from '../../../../types/category';
 
 export enum TransactionStatus {
   PENDING = 'PENDING',

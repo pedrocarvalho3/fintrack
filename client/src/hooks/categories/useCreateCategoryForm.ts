@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { categorySchema, CategoryFormData } from '@/schemas/categorySchema';
-import { Category, StatusType } from '../types';
+import { Category, StatusType } from '../../app/dashboard/categories/types';
 
 const DEFAULT_COLOR = '#ef4444';
 
 export const useCreateCategoryForm = (
-  onSubmit: (data: Category) => void,
-  onClose: () => void
+  onSubmit: (data: Omit<Category, 'id'>) => void,
+  onClose: () => void,
 ) => {
   const {
     register,

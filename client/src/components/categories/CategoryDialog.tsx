@@ -17,27 +17,39 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { CategoryContext } from '../context/CategoryContext';
-import { CategoryType, Category } from '../types';
+import { CategoryType } from '../types';
 import { suggestedIcons } from '../mocks/suggested-icons';
 import { categoryColors } from '../mocks/category-colors';
+import { useCreateCategoryForm } from '../../../../hooks/categories/useCreateCategoryForm';
 
-export default function CreateCategoryDialog() {
+export function CategoryDialog() {
+  const isEdit = false;
+
   const {
-    register,
-    handleSubmit,
-    errors,
-    setValue,
-    watch,
-    reset,
-  } = useCreateCategoryForm(handleCreateCategory, () => setCreateCategoryDialogOpen(false));
+    createCategory: {
+      createCategoryDialogOpen,
+      setCreateCategoryDialogOpen,
+      handleCreateCategory,
+    },
+  } = useContext(CategoryContext)!;
 
-  const getSuggestedIcons = () => {
-    return Category. === CategoryType.INCOME
+  const onSubmit = handleCreateCategory;
+
+  const { register, handleSubmit, errors, setValue, watch } =
+    useCreateCategoryForm(onSubmit, () => {
+      setCreateCategoryDialogOpen(false);
+    });
+
+  const type = watch('type');
+  const icon = watch('icon');
+  const color = watch('color');
+
+  const getSuggestedIcons = () =>
+    type === CategoryType.INCOME
       ? suggestedIcons.income
       : suggestedIcons.expense;
-  };
 
   return (
     <Dialog
@@ -46,19 +58,23 @@ export default function CreateCategoryDialog() {
     >
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>Criar Nova Categoria</DialogTitle>
+          <DialogTitle>
+            {isEdit ? 'Editar Categoria' : 'Criar Nova Categoria'}
+          </DialogTitle>
           <DialogDescription>
-            Crie uma nova categoria para organizar suas transações financeiras.
+            {isEdit
+              ? 'Atualize os dados da categoria selecionada.'
+              : 'Crie uma nova categoria para organizar suas transações financeiras.'}
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit} autoComplete="off">
           <div className="grid gap-2">
             <Label htmlFor="type">Tipo da Categoria</Label>
             <Select
-              value={formData.type.toString()}
+              value={type.toString()}
               onValueChange={value =>
-                handleInputChange('type', parseInt(value) as CategoryType)
+                setValue('type', parseInt(value) as CategoryType)
               }
             >
               <SelectTrigger>
@@ -79,14 +95,12 @@ export default function CreateCategoryDialog() {
             <Label htmlFor="name">Nome da Categoria *</Label>
             <Input
               id="name"
-              type="text"
-              placeholder="Ex: Alimentação, Salário, Transporte..."
-              value={formData.name}
-              onChange={e => handleInputChange('name', e.target.value)}
+              placeholder="Ex: Alimentação, Salário..."
+              {...register('name')}
               className={errors.name ? 'border-red-500' : ''}
             />
             {errors.name && (
-              <p className="text-sm text-red-500">{errors.name}</p>
+              <p className="text-sm text-red-500">{errors.name.message}</p>
             )}
           </div>
 
@@ -94,9 +108,8 @@ export default function CreateCategoryDialog() {
             <Label htmlFor="description">Descrição (Opcional)</Label>
             <Textarea
               id="description"
-              placeholder="Descreva brevemente esta categoria..."
-              value={formData.description}
-              onChange={e => handleInputChange('description', e.target.value)}
+              placeholder="Ex: Despesas com comida"
+              {...register('description')}
               rows={3}
             />
           </div>
@@ -106,36 +119,32 @@ export default function CreateCategoryDialog() {
             <div className="flex gap-2">
               <Input
                 id="icon"
-                type="text"
                 placeholder="Digite um emoji ou ícone"
-                value={formData.icon}
-                onChange={e => handleInputChange('icon', e.target.value)}
+                {...register('icon')}
                 className={`flex-1 ${errors.icon ? 'border-red-500' : ''}`}
               />
               <div className="flex h-10 w-12 items-center justify-center rounded-md border bg-gray-50">
-                <span className="text-lg">{formData.icon || '❓'}</span>
+                <span className="text-lg">{icon || '❓'}</span>
               </div>
             </div>
             {errors.icon && (
-              <p className="text-sm text-red-500">{errors.icon}</p>
+              <p className="text-sm text-red-500">{errors.icon.message}</p>
             )}
 
-            <div className="grid gap-2">
-              <Label className="text-sm text-gray-600">Ícones sugeridos:</Label>
-              <div className="flex flex-wrap gap-2">
-                {getSuggestedIcons().map((icon, index) => (
-                  <Button
-                    key={index}
-                    variant="outline"
-                    size="sm"
-                    type="button"
-                    onClick={() => handleInputChange('icon', icon)}
-                    className="h-auto p-2"
-                  >
-                    {icon}
-                  </Button>
-                ))}
-              </div>
+            <Label className="text-sm text-gray-600">Ícones sugeridos:</Label>
+            <div className="flex flex-wrap gap-2">
+              {getSuggestedIcons().map((iconOption, index) => (
+                <Button
+                  key={index}
+                  variant="outline"
+                  size="sm"
+                  type="button"
+                  onClick={() => setValue('icon', iconOption)}
+                  className="h-auto p-2"
+                >
+                  {iconOption}
+                </Button>
+              ))}
             </div>
           </div>
 
@@ -145,36 +154,43 @@ export default function CreateCategoryDialog() {
               <Input
                 id="color"
                 type="color"
-                value={formData.color}
-                onChange={e => handleInputChange('color', e.target.value)}
+                {...register('color')}
                 className="h-10 w-16 rounded-md border p-1"
               />
               <div className="flex flex-wrap gap-2">
-                {categoryColors.map((color, index) => (
+                {categoryColors.map((colorOption, index) => (
                   <Button
                     key={index}
                     variant="outline"
                     size="sm"
                     type="button"
-                    onClick={() => handleInputChange('color', color)}
+                    onClick={() => setValue('color', colorOption)}
                     className="h-8 w-8 border-2 p-0"
                     style={{
-                      backgroundColor: color,
-                      borderColor: formData.color === color ? '#000' : color,
+                      backgroundColor: colorOption,
+                      borderColor: color === colorOption ? '#000' : colorOption,
                     }}
                   />
                 ))}
               </div>
             </div>
           </div>
-        </div>
 
-        <DialogFooter>
-          <Button variant="outline" onClick={() => setCreateCategoryDialogOpen(false)}>
-            Cancelar
-          </Button>
-          <Button onClick={handleSubmit}>Criar Categoria</Button>
-        </DialogFooter>
+          <DialogFooter>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => {
+                setCreateCategoryDialogOpen(false);
+              }}
+            >
+              Cancelar
+            </Button>
+            <Button type="submit">
+              {isEdit ? 'Salvar Alterações' : 'Criar Categoria'}
+            </Button>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );

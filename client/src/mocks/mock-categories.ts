@@ -1,4 +1,4 @@
-import { CategoryType, StatusType } from '@/app/dashboard/categories/types';
+import { CategoryType, StatusType } from '@/types/category';
 
 export const mockCategories = [
   {

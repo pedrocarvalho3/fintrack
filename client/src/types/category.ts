@@ -11,7 +11,7 @@ export enum StatusType {
 export interface Category {
   id: number;
   name: string;
-  transactionCount: number;
+  transactionCount?: number;
   status: StatusType;
   icon: string;
   color: string;

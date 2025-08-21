@@ -5,8 +5,9 @@ import { RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { CategoryContext } from '../context/CategoryContext';
+import { useCategoryDialog } from '../../../../hooks/categories/useCategoryDialog';
 import { useContext } from 'react';
+import { CategoryContext } from '../context/CategoryContext';
 
 interface TopBarProps {
   searchTerm: string;
@@ -19,7 +20,9 @@ export default function TopBar({
   handleSearch,
   handleRefresh,
 }: TopBarProps) {
-  const { createCategory } = useContext(CategoryContext)!;
+  const {
+    createCategory: { setCreateCategoryDialogOpen },
+  } = useContext(CategoryContext)!;
 
   return (
     <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
@@ -42,7 +45,7 @@ export default function TopBar({
       </div>
       <Button
         className="w-full sm:w-auto"
-        onClick={() => createCategory.setCreateCategoryDialogOpen(true)}
+        onClick={() => setCreateCategoryDialogOpen(true)}
       >
         <Plus className="mr-2 h-4 w-4" />
         Create New Category

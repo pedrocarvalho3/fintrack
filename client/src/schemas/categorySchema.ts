@@ -1,6 +1,6 @@
 // schemas/categorySchema.ts
 import { z } from 'zod';
-import { CategoryType } from '@/app/dashboard/categories/types';
+import { CategoryType } from '@/types/category';
 
 export const categorySchema = z.object({
   name: z.string().min(1, 'Nome da categoria é obrigatório'),

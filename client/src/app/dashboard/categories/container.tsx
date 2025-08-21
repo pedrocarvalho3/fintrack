@@ -1,16 +1,16 @@
 'use client';
 
 import Title from '@/components/blocks/Title';
-import TopBar from './components/TopBar';
-import CategoryGrid from './components/CategoryGrid';
+import TopBar from '@/components/categories/TopBar';
+import CategoryGrid from '@/components/categories/CategoryGrid';
 import Pagination from '@/components/blocks/Pagination';
-import { useCategories } from './hooks/useCategories';
+import { useCategories } from '../../../hooks/categories/useCategories';
 import { useState } from 'react';
-import DeleteCategoryDialog from './components/DeleteCategoryDialog';
+import DeleteCategoryDialog from '@/components/categories/DeleteCategoryDialog';
 import { Toaster } from 'sonner';
-import CreateCategoryDialog from './components/CreateCategoryDialog';
-import { CategoryProvider } from './context/CategoryContext';
-import UpdateCategoryDialog from './components/UpdateCategoryDialog';
+import { CategoryDialog } from '@/components/categories/CategoryDialog';
+import { CategoryProvider } from '@/context/CategoryContext';
+import { useCategoryDialog } from '../../../hooks/categories/useCategoryDialog';
 
 export default function CategoriesContainer() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,8 +40,7 @@ export default function CategoriesContainer() {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />
-        <CreateCategoryDialog />
-        <UpdateCategoryDialog />
+        <CategoryDialog />
         <DeleteCategoryDialog label="category" />
         <Toaster />
       </div>

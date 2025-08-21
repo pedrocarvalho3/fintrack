@@ -1,7 +1,7 @@
 import { createContext, useState } from 'react';
-import useDeleteCategory from '../hooks/useDeleteCategory';
-import useCreateCategory from '../hooks/useCreateCategory';
-import useUpdateCategory from '../hooks/useUpdateCategory';
+import useDeleteCategory from '@/hooks/categories/useDeleteCategory';
+import useCreateCategory from '@/hooks/categories/useCreateCategory';
+import useUpdateCategory from '@/hooks/categories/useUpdateCategory';
 
 interface CategoryContextType {
   currentCategoryId: number | null;

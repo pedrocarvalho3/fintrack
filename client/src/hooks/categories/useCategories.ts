@@ -1,4 +1,4 @@
-import { Category } from '../types';
+import { Category } from '../../types/category';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
